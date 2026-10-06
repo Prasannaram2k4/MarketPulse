@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import api from '../api/axiosConfig';
 import '../components/AnimatedLoginPage.css';
 
 const RegisterPage = () => {
@@ -35,7 +35,7 @@ const RegisterPage = () => {
     }
 
     try {
-      await axios.post('http://localhost:5001/api/auth/register', { 
+      await api.post('/api/auth/register', {
         username, 
         email, 
         password 
@@ -46,7 +46,10 @@ const RegisterPage = () => {
         navigate('/login');
       }, 2000);
     } catch (error) {
-      setError(error.response?.data?.message || 'Registration failed. Please try again.');
+      setError(
+        error.response?.data?.message
+        || 'Could not reach the registration service. Check the API deployment and try again.'
+      );
     } finally {
       setLoading(false);
     }
@@ -84,6 +87,8 @@ const RegisterPage = () => {
               placeholder="Enter your username" 
               required 
               disabled={loading}
+              minLength="2"
+              maxLength="32"
             />
           </div>
 
@@ -109,6 +114,7 @@ const RegisterPage = () => {
               required 
               disabled={loading}
               minLength="6"
+              maxLength="128"
             />
           </div>
 

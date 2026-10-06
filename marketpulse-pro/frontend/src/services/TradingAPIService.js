@@ -1,15 +1,15 @@
 // Enhanced API service for trading data and market information
 import axios from 'axios';
+import { API_BASE_URL } from '../api/axiosConfig';
 
 class TradingAPIService {
   constructor() {
-    this.baseURL = 'http://localhost:5001';
+    this.baseURL = API_BASE_URL;
     
-    // Real API Keys (you'll need to get these from the providers)
-    this.alphaVantageKey = import.meta.env?.VITE_ALPHA_VANTAGE_KEY || 'demo';
-    this.finnhubKey = import.meta.env?.VITE_FINNHUB_KEY || 'co2h9cpr01qicbkj40egco2h9cpr01qicbkj40f0';
-    this.newsApiKey = import.meta.env?.VITE_NEWS_API_KEY || 'demo';
-    this.polygonKey = import.meta.env?.VITE_POLYGON_KEY || 'demo';
+    this.alphaVantageKey = import.meta.env.VITE_ALPHA_VANTAGE_KEY || 'demo';
+    this.finnhubKey = import.meta.env.VITE_FINNHUB_KEY || '';
+    this.newsApiKey = import.meta.env.VITE_NEWS_API_KEY || 'demo';
+    this.polygonKey = import.meta.env.VITE_POLYGON_KEY || 'demo';
     
     // Initialize axios instances
     this.api = axios.create({

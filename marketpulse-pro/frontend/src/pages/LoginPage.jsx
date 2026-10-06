@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import api from '../api/axiosConfig';
 import '../components/AnimatedLoginPage.css';
 
 const LoginPage = () => {
@@ -20,7 +20,7 @@ const LoginPage = () => {
     setSuccess('');
     
     try {
-      const res = await axios.post('http://localhost:5001/api/auth/login', { email, password });
+      const res = await api.post('/api/auth/login', { email, password });
       setSuccess('Login successful! Redirecting...');
       login(res.data.token);
       
@@ -28,7 +28,10 @@ const LoginPage = () => {
         navigate('/');
       }, 1000);
     } catch (err) {
-      setError('Invalid credentials. Please check your email and password.');
+      setError(
+        err.response?.data?.message
+        || 'Could not reach the sign-in service. Check the API deployment and try again.'
+      );
       console.error('Login error', err);
     } finally {
       setLoading(false);

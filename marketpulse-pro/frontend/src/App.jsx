@@ -11,22 +11,13 @@ import PaperTradingDashboard from './components/PaperTradingDashboard';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import PrivateRoute from './components/PrivateRoute';
-import { useAuth } from './context/AuthContext';
 import './App.css';
 
 function App() {
-  const { token } = useAuth();
-
   return (
     <Router>
       <div className="App">
         <Navigation />
-        {!token && (
-          <div className="app-header">
-            <h1>MarketPulse Pro 🚀</h1>
-            <p>Professional Trading Platform</p>
-          </div>
-        )}
         <main className="main-content">
           <Routes>
             <Route 
@@ -56,10 +47,6 @@ function App() {
             <Route 
               path="/news" 
               element={<PrivateRoute><MarketNews /></PrivateRoute>} 
-            />
-            <Route 
-              path="/analysis" 
-              element={<PrivateRoute><Analysis /></PrivateRoute>} 
             />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />

@@ -1,22 +1,68 @@
-/* Global App Styles with Black/White Theme and Text Visibility Fixes */
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #17231f;
+  background: #f4f7f5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --color-ink: #17231f;
+  --color-muted: #718078;
+  --color-accent: #a5e65a;
+  --color-accent-dark: #4d7a26;
+  --color-border: #e3eae5;
+  --color-surface: #ffffff;
+  --shadow-card: 0 12px 36px rgb(24 42 31 / 6%), 0 1px 3px rgb(24 42 31 / 4%);
+}
+
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  min-width: 320px;
+  min-height: 100%;
+  background: #f4f7f5;
+}
+
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 25%, #ffffff 50%, #f8f9fa 75%, #e9ecef 100%);
+  min-width: 320px;
   min-height: 100vh;
-  color: #212529;
+  margin: 0;
+  color: var(--color-ink);
+  background:
+    radial-gradient(ellipse at 88% 0%, rgb(205 233 187 / 22%), transparent 32rem),
+    #f4f7f5;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgb(116 169 69 / 45%);
+  outline-offset: 3px;
 }
 
 #root {
-  width: 100%;
   min-height: 100vh;
-  margin: 0;
-  padding: 0;
 }
 
 .App {
@@ -28,193 +74,46 @@ body {
 .main-content {
   flex: 1;
   width: 100%;
+  animation: page-appear 420ms ease-out both;
 }
 
-/* App Header for non-authenticated users */
 .app-header {
-  text-align: center;
-  padding: 60px 20px 40px;
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(20px);
-  margin: 20px;
+  width: min(100% - 48px, 1500px);
+  margin: 32px auto 0;
+  padding: 28px 32px;
+  border: 1px solid var(--color-border);
   border-radius: 20px;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.08),
-    0 0 0 1px rgba(0, 0, 0, 0.05);
-  border: 2px solid #f1f3f4;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
 }
 
 .app-header h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin: 0 0 16px 0;
-  background: linear-gradient(135deg, #000000, #333333);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  margin: 0 0 6px;
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  letter-spacing: -0.045em;
 }
 
 .app-header p {
-  font-size: 1.25rem;
-  color: #495057;
-  font-weight: 400;
+  margin: 0;
+  color: var(--color-muted);
 }
 
-/* Universal Text Visibility Fixes */
-*,
-*::before,
-*::after {
-  color: inherit;
-}
-
-/* Explicit color declarations for all text elements */
-h1, h2, h3, h4, h5, h6 {
-  color: #212529 !important;
-}
-
-p, span, div, label, li, td, th {
-  color: #212529 !important;
-}
-
-/* Input and form elements */
-input, 
-input[type="text"], 
-input[type="email"], 
-input[type="password"], 
-input[type="number"], 
-select, 
-textarea, 
-button {
-  color: #212529 !important;
+.form-input,
+input,
+select,
+textarea {
+  color: var(--color-ink);
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: #6c757d !important;
+  color: #9aa69e;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-  color: #000000 !important;
-}
-
-/* Link colors */
-a, a:visited {
-  color: #000000 !important;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #333333 !important;
-}
-
-/* Button text */
-button, 
-button * {
-  color: inherit !important;
-}
-
-/* Table text */
-table,
-table * {
-  color: #212529 !important;
-}
-
-/* Navigation specific */
-nav, nav * {
-  color: inherit !important;
-}
-
-/* Form elements in light backgrounds */
-.form-input,
-.form-select,
-.form-textarea,
-input,
-select,
-textarea {
-  background: white !important;
-  color: #212529 !important;
-  border: 2px solid #dee2e6 !important;
-}
-
-.form-input:focus,
-.form-select:focus,
-.form-textarea:focus,
-input:focus,
-select:focus,
-textarea:focus {
-  color: #000000 !important;
-  border-color: #333333 !important;
-}
-
-/* Dark text on light cards */
-.dashboard-card,
-.market-card,
-.news-card,
-.panel-section,
-.trading-form,
-.account-selection {
-  color: #212529 !important;
-}
-
-.dashboard-card *,
-.market-card *,
-.news-card *,
-.panel-section *,
-.trading-form *,
-.account-selection * {
-  color: inherit !important;
-}
-
-/* Specific overrides for problematic elements */
-.balance-display,
-.position-symbol,
-.market-name,
-.news-title,
-.card-title {
-  color: #000000 !important;
-}
-
-.balance-label,
-.news-summary,
-.market-hours {
-  color: #495057 !important;
-}
-
-/* Loading states */
-.loading {
-  color: #6c757d !important;
-}
-
-/* Status indicators */
-.status-text,
-.news-time,
-.last-updated {
-  color: #6c757d !important;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .app-header {
-    margin: 10px;
-    padding: 40px 16px 24px;
-  }
-  
-  .app-header h1 {
-    font-size: 2.25rem;
-  }
-  
-  .app-header p {
-    font-size: 1.1rem;
-  }
-}
-
-/* Animation keyframes */
-@keyframes fadeIn {
+@keyframes page-appear {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -222,38 +121,13 @@ textarea:focus {
   }
 }
 
-/* Apply fade-in animation to main content */
-.main-content {
-  animation: fadeIn 0.6s ease-out;
-}
-
-/* Remove default browser styling that might interfere */
-button {
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-input, select, textarea {
-  outline: none;
-}
-
-/* Ensure all interactive elements are visible */
-button:focus,
-input:focus,
-select:focus,
-textarea:focus,
-a:focus {
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  * {
-    color: #000000 !important;
-  }
-  
-  input, select, textarea {
-    border-color: #000000 !important;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

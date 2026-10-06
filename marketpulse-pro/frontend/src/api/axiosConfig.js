@@ -1,7 +1,12 @@
 import axios from 'axios';
 
+const configuredBackendUrl = import.meta.env.VITE_BACKEND_URL?.trim();
+export const API_BASE_URL = configuredBackendUrl
+  ? configuredBackendUrl.replace(/\/+$/, '')
+  : '';
+
 const api = axios.create({
-  baseURL: 'http://localhost:5001', // Your backend URL
+  baseURL: API_BASE_URL,
 });
 
 // Add a request interceptor to include the token in headers

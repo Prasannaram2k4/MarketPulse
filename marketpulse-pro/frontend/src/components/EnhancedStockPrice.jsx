@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import AdvancedTradingViewChart from './AdvancedTradingViewChart';
+import api from '../api/axiosConfig';
 import './FundedAccountDashboard.css';
 
 const EnhancedStockPrice = () => {
@@ -16,7 +16,7 @@ const EnhancedStockPrice = () => {
       setStockData(null);
       setLoading(true);
       
-      const response = await axios.get(`http://localhost:5001/api/stock/${symbol}`);
+      const response = await api.get(`/api/stock/${encodeURIComponent(symbol)}`);
       console.log('API response:', response.data);
 
       if (response.data && response.data['Global Quote'] && Object.keys(response.data['Global Quote']).length > 0) {

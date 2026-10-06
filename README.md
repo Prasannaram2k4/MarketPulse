@@ -125,7 +125,7 @@ marketpulse/
 ## 🚦 Getting Started
 
 ### Prerequisites
-- Node.js (v16 or higher)
+- Node.js 20.19+ (required by Vite 7)
 - MongoDB (local or Atlas)
 - npm or yarn package manager
 
@@ -143,7 +143,7 @@ marketpulse/
    npm install
    ```
 
-   Create a `.env` file in the backend directory:
+   Create a `.env` file in the backend directory (copy `marketpulse-pro/backend/.env.example` and set your database URI and JWT secret):
    ```env
    PORT=5001
    MONGO_URI=your_mongodb_connection_string
@@ -185,8 +185,21 @@ marketpulse/
    ```
    Frontend will run on `http://localhost:5173` (or another port shown in terminal)
 
+   The Vite dev server proxies `/api/*` requests to the local backend on port 5001. No frontend API URL override is needed for local development.
+
 3. **Access the Application**
    Open your browser and navigate to the frontend URL (typically `http://localhost:5173`)
+
+## ☁️ Deploy the full app to Vercel
+
+The repository-root `vercel.json` builds the Vite frontend and exposes the Express API as Vercel serverless functions under `/api/*`. Frontend API calls use the same Vercel domain by default, so registration and sign-in work without a separate backend URL.
+
+1. Push the deployment-ready code to GitHub, then import that repository in Vercel. Keep the project root directory set to the repository root (do not select `marketpulse-pro/frontend`).
+2. In Vercel project settings, add `MONGO_URI` (your Atlas connection string) and `JWT_SECRET` (a long random signing secret) for the Production environment. These are server-only variables; do not prefix them with `VITE_`.
+3. Configure Atlas network access to allow the Vercel function to reach the cluster. An Atlas “current IP” entry only allows your computer and does not automatically allow Vercel.
+4. Deploy. The build uses `npm ci` in both app folders, builds the frontend, routes `/api/*` to the serverless API, and sends browser routes to the SPA.
+
+For local development, copy `marketpulse-pro/backend/.env.example` to `.env` in the backend directory and set the same server variables. The `.env` file is ignored by Git. You can optionally set `VITE_BACKEND_URL` to a separately hosted API URL; configure `CORS_ORIGINS` on that backend with the Vercel origin if cross-origin requests are restricted. Any `VITE_` variable is compiled into browser code, so only use provider keys that are safe to expose publicly. Do not put database credentials or JWT secrets in `VITE_` variables.
 
 ## 🔑 API Keys Setup
 

@@ -18,7 +18,7 @@ const Navigation = () => {
   if (!token) return null;
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" aria-label="Main navigation">
       <div className="navbar-container">
         <div className="navbar-brand">
           <Link to="/" className="brand-link">
@@ -84,13 +84,6 @@ const Navigation = () => {
             <span>Market News</span>
           </Link>
           
-          <Link 
-            to="/analysis" 
-            className={`navbar-item ${isActive('/analysis') ? 'active' : ''}`}
-          >
-            <span className="nav-icon">📊</span>
-            <span>Analysis</span>
-          </Link>
         </div>
         
         <div className="navbar-actions">
