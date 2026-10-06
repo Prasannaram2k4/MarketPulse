@@ -2,6 +2,8 @@
 
 A comprehensive, full-stack trading platform with real-time market data, paper trading capabilities, portfolio management, and trading journal features.
 
+**Production:** [Open MarketPulse Pro](https://marketpulse-vercel-eight.vercel.app/)
+
 ## 🚀 Project Overview
 
 **MarketPulse Pro** is a professional-grade trading platform that enables users to:
